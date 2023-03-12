@@ -24,7 +24,7 @@ fi
 
 while read -d $'\0' file
 do
-    rating=`exiv2 -K Exif.Image.Rating -Pv "$file" || true`
+    rating=`exiv2 -K Exif.Image.Rating -K Xmp.xmp.Rating -Pv "$file" | sort -n | tail -1 || true`
     if [ -n "$rating" ] && [ "$rating" -ge 3 ]; then 
         echo $file
     fi
